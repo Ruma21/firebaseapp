@@ -1,0 +1,133 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #e5ddd5; /* Similar a WhatsApp web */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px; /* Límite de ancho */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px); /* Ocupa casi toda la altura */
+    max-height: 800px; /* Límite de altura */
+    overflow: hidden; /* Evita que elementos internos se salgan */
+}
+
+h1 {
+    text-align: center;
+    color: #075e54; /* Verde oscuro WhatsApp */
+    margin: 0;
+    padding: 15px;
+    background-color: #ededed;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info {
+    padding: 5px 15px;
+    background-color: #f8f8f8;
+    font-size: 0.9em;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+#usernameDisplay {
+    font-weight: bold;
+    color: #075e54;
+}
+
+#chatbox {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 15px;
+    overflow-y: auto; /* Scroll solo cuando sea necesario */
+    background-color: #e5ddd5; /* Fondo del chat */
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); /* Textura WhatsApp (opcional) */
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    background-color: #fff; /* Mensajes recibidos */
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    max-width: 75%;
+    align-self: flex-start; /* Alineados a la izquierda */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+    position: relative; /* Para posicionar elementos internos */
+}
+
+.message.sent {
+    background-color: #dcf8c6; /* Verde claro para mensajes enviados */
+    align-self: flex-end; /* Alineados a la derecha */
+}
+
+.message .username {
+    font-weight: 500; /* Semi-bold */
+    font-size: 0.85em;
+    color: #075e54; /* O un color distintivo */
+    margin-bottom: 3px;
+    display: block;
+}
+
+.message .timestamp {
+    font-size: 0.7em;
+    color: #999;
+    text-align: right; /* Hora a la derecha del globo */
+    display: block; /* Asegura que esté en su línea */
+    margin-top: 4px;
+}
+
+#inputArea {
+    display: flex;
+    padding: 10px 15px;
+    background-color: #f0f0f0; /* Fondo del área de input */
+    border-top: 1px solid #ddd;
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Input redondeado */
+    margin-right: 10px;
+    font-size: 1em;
+}
+#messageInput:focus {
+    outline: none;
+    border-color: #075e54;
+}
+
+#sendButton {
+    padding: 0 15px; /* Ajuste para icono + texto */
+    background-color: #128c7e; /* Verde WhatsApp */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Botón circular */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    width: 45px; /* Ancho fijo */
+    height: 45px; /* Alto fijo */
+}
+#sendButton svg {
+    fill: white; /* Color del icono */
+}
+#sendButton span {
+    display: none; /* Ocultamos el texto "Enviar" */
+}
+
+#sendButton:hover {
+    background-color: #075e54; /* Verde más oscuro al pasar el ratón */
+}
