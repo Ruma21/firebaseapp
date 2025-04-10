@@ -1,3 +1,25 @@
+// --- Verificación de Autenticación (AÑADIR ESTO AL INICIO DE script.js) ---
+// Comprueba si el usuario pasó por la página de login en esta sesión
+if (sessionStorage.getItem('isAuthenticated') !== 'true') {
+    console.log("Usuario no autenticado. Redirigiendo al login...");
+    // Si no está autenticado, lo mandamos de vuelta al login
+    window.location.href = 'login.html';
+
+    // Detenemos la ejecución del resto del script para que no inicialice el chat
+    throw new Error("Redirección necesaria: Usuario no autenticado.");
+}
+
+// --- Si llegamos aquí, el usuario está "autenticado" (pasó el login) ---
+console.log("Usuario autenticado en esta sesión.");
+
+// -----------------------------------------------------------------------
+// A PARTIR DE AQUÍ VA TODO TU CÓDIGO EXISTENTE DE script.js:
+// import { initializeApp } from "...";
+// import { getDatabase, ... } from "...";
+// const firebaseConfig = { ... };
+// const app = initializeApp(firebaseConfig);
+// etc...
+// -----------------------------------------------------------------------
 
 // --- 1. Importar funciones de Firebase v9 ---
 // Necesitamos initializeApp para conectar, y las funciones de Database

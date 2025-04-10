@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos para la página de login */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ocupa toda la altura */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Bonito fondo degradado - ¡Puedes cambiar los colores! */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden; /* Evita barras de scroll innecesarias */
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        input[type="password"] {
+            width: calc(100% - 22px); /* Ajuste para padding */
+            padding: 12px 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+         input[type="password"]:focus {
+             outline: none;
+             border-color: #764ba2; /* Color del gradiente */
+         }
+
+        button {
+            background-color: #764ba2; /* Color del gradiente */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            width: 100%; /* Botón ancho completo */
+        }
+
+        button:hover {
+            background-color: #667eea; /* Otro color del gradiente */
+        }
+         button:active {
+             transform: scale(0.98); /* Efecto al presionar */
+         }
+
+        .error-message {
+            color: #d9534f; /* Rojo para errores */
+            margin-top: 15px;
+            font-size: 0.9em;
+            height: 1em; /* Espacio reservado para que no salte el layout */
+            visibility: hidden; /* Oculto por defecto */
+        }
+         .error-message.visible {
+             visibility: visible; /* Visible cuando hay error */
+         }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>Acceso Privado al Chat</h1>
+        <form id="loginForm">
+            <label for="passwordInput">Contraseña:</label>
+            <input type="password" id="passwordInput" required>
+            <div id="errorMessage" class="error-message">Contraseña incorrecta</div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <script>
+        // --- Configuración ---
+        // ¡¡CAMBIA ESTA CONTRASEÑA!! (Recuerda: es visible en el código fuente)
+        const CORRECT_PASSWORD = "tu_password_secreto";
+
+        // --- Elementos del DOM ---
+        const loginForm = document.getElementById('loginForm');
+        const passwordInput = document.getElementById('passwordInput');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // --- Lógica de Validación ---
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que la página se recargue
+
+            const enteredPassword = passwordInput.value;
+
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // Contraseña Correcta: Marcar como autenticado y redirigir
+                console.log("Contraseña correcta. Redirigiendo...");
+                // Guardamos un indicador en sessionStorage (solo dura mientras la pestaña esté abierta)
+                sessionStorage.setItem('isAuthenticated', 'true');
+                window.location.href = 'index.html'; // Redirige a la página del chat
+            } else {
+                // Contraseña Incorrecta: Mostrar mensaje de error
+                console.log("Contraseña incorrecta.");
+                errorMessage.classList.add('visible'); // Muestra el mensaje
+                passwordInput.focus(); // Pone el foco de nuevo en el input
+                passwordInput.select(); // Selecciona el texto para fácil reemplazo
+                 // Opcional: ocultar el error después de unos segundos
+                 setTimeout(() => {
+                     errorMessage.classList.remove('visible');
+                 }, 3000);
+            }
+        });
+
+         // Opcional: Limpiar error al empezar a escribir de nuevo
+         passwordInput.addEventListener('input', () => {
+            errorMessage.classList.remove('visible');
+         });
+
+    </script>
+
+</body>
+</html>
